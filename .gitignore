@@ -3,7 +3,6 @@
 .env
 __pycache__/
 .DS_Store
-tgBot.py
 main.py
 .images
 images/
