@@ -13,5 +13,6 @@ def get_nasa_epic_image_links(params):
 
 
 if __name__ == '__main__':
-    params_nasa = dict(dotenv_values(".env"))
+    params_nasa = {'api_key': dict(dotenv_values(".env"))['api_key']}
     fetch_images(get_nasa_epic_image_links(params_nasa))
+
