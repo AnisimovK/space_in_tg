@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 Create .env file in project directory and copy-paste this:
 ```
-NASA_API_TOKEN=<ENTER YOUR NASA API TOKEN HERE>
+api_key=<ENTER YOUR NASA API TOKEN HERE>
 TELEGRAM_TOKEN=<ENTER YOUR TELEGRAM BOT TOKEN HERE>
 TELEGRAM_CHAT_ID=<ENTER TELEGRAM CHAT_ID WHERE PHOTOS WILL BE PUBLISH>
 ```
