@@ -3,7 +3,7 @@ import requests
 import os
 from pathlib import Path
 from datetime import datetime
-import json
+
 
 
 def get_response(url, headers=None, params=None):

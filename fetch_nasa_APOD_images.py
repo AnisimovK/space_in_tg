@@ -1,6 +1,7 @@
 import argparse
 from dotenv import dotenv_values
 from service_functions import *
+import json
 
 
 def get_nasa_image_links(params):
