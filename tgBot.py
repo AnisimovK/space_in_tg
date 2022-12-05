@@ -18,24 +18,21 @@ if __name__ == '__main__':
     args = parser.parse_args()
     img_folder_path = "images"
     telegram_chat_id = os.environ['TELEGRAM_CHAT_ID']
-    TG_TOKEN = os.environ['TELEGRAM_TOKEN']
-    bot = telegram.Bot(token=TG_TOKEN)
+    tg_token = os.environ['TELEGRAM_TOKEN']
+    bot = telegram.Bot(token=tg_token)
 
     while True:
+        imgs_in_folder = os.listdir(img_folder_path)
+        rand_img_name = random.choice(imgs_in_folder)
+        filepath = Path(img_folder_path, rand_img_name)
         try:
-            imgs_in_folder = os.listdir(img_folder_path)
-            if imgs_in_folder:
-                rand_img_name = random.choice(imgs_in_folder)
-                filepath = Path(img_folder_path, rand_img_name)
-                with open(filepath, 'rb') as file:
-                    bot.send_photo(
-                        chat_id=telegram_chat_id,
-                        photo=file
-                    )
-            else:
-                print("Images folder is empty!")
-        except FileNotFoundError:
-            print("Images folder doesn't exist!")
+            with open(filepath, 'rb') as file:
+                bot.send_photo(
+                    chat_id=telegram_chat_id,
+                    photo=file
+                )
+        except telegram.error.NetworkError as e:
+            print(e)
         time.sleep(float(args.period) * 3600)
 
 

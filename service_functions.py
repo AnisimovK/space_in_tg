@@ -2,8 +2,6 @@ from urllib.parse import urlparse, unquote
 import requests
 import os
 from pathlib import Path
-from datetime import datetime
-
 
 
 def get_response(url, headers=None, params=None):
@@ -18,30 +16,32 @@ def get_filename_and_extension(for_ext_url):
     extension = splitted_text[1]
     filename = unquote(os.path.split(splitted_text[0])[1])
     if extension in image_extensions:
-        return filename + extension
+        return f"{filename}{extension}"
     else:
         return None
 
 
-def download_image(url, index):
+def download_image(url, index, params=None):
     local_image_dir = os.path.join(os.getcwd(), r'images\\')
     Path(local_image_dir).mkdir(parents=True, exist_ok=True)
     filename_and_extension = get_filename_and_extension(url)
-    if filename_and_extension:
-        filename = local_image_dir + index + filename_and_extension
-        with open(filename, 'wb') as file:
-            file.write(get_response(url))
+    try:
+        if filename_and_extension != None:  # better: if item is not None
+            filename = f"{local_image_dir}{index}{filename_and_extension}"
+            with open(filename, 'wb') as file:
+                file.write(get_response(url, params=params))
+        else:
+            raise TypeError
+    except TypeError:
+        print('fail')
 
 
 def split_date_to_url(date):
-    year = datetime.strptime(date, '%Y-%m-%d %H:%M:%S').date().strftime("%Y")
-    month = datetime.strptime(date, '%Y-%m-%d %H:%M:%S').date().strftime("%m")
-    day = datetime.strptime(date, '%Y-%m-%d %H:%M:%S').date().strftime("%d")
-    return year + '/' + month + '/' + day + '/'
+    return f"{date[0:4]}{'/'}{date[5:7]}{'/'}{date[8:10]}{'/'}"
 
 
-def fetch_images(whose_images):
+def fetch_images(whose_images, params=None):
     for image_index, image_url in enumerate(whose_images):
-        download_image(image_url, str(image_index))
+        download_image(image_url, str(image_index), params=params)
 
 
