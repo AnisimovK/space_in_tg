@@ -6,10 +6,7 @@ import json
 
 def get_nasa_image_links(params):
     response_content = json.loads(get_response('https://api.nasa.gov/planetary/apod', params=params))
-    images_links = []
-    for image_data in response_content:
-        if image_data['media_type'] == 'image':
-            images_links.append(image_data['url'])
+    images_links = [image_data['url'] for image_data in response_content if image_data['media_type'] == 'image']
     return images_links
 
 
