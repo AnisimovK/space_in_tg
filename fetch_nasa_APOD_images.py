@@ -11,7 +11,7 @@ def get_nasa_image_links(params):
 
 
 if __name__ == '__main__':
-    params_nasa = {'api_key': dict(dotenv_values(".env"))['API_KEY']}
+    params_nasa = {'api_key': dict(dotenv_values(".env"))['NASA_API_KEY']}
 
     parser = argparse.ArgumentParser(
         description='[-h] [-count your_count] '

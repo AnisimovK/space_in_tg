@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description="""\
         Скрипт автоматически публикует фотографии каждые 'period' часов.\n
-        При отсутсвии параметра 'period' публикация происходит каждые 4 часа."""
+        При отсутствии параметра 'period' публикация происходит каждые 4 часа."""
     )
     parser.add_argument('-period', help='периодичность публикации картинок в часах', type=float, default=4)
     args = parser.parse_args()
@@ -31,9 +31,12 @@ if __name__ == '__main__':
                     chat_id=telegram_chat_id,
                     photo=file
                 )
+            time.sleep(float(args.period) * 3600)
         except telegram.error.NetworkError as e:
             print(e)
-        time.sleep(float(args.period) * 3600)
+            time.sleep(float(args.period) * 10)
+
+
 
 
 
