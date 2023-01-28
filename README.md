@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 Create .env file in project directory and copy-paste this:
 ```
-api_key=<ENTER YOUR NASA API TOKEN HERE>
+NASA_API_KEY=<ENTER YOUR NASA API TOKEN HERE>
 TELEGRAM_TOKEN=<ENTER YOUR TELEGRAM BOT TOKEN HERE>
 TELEGRAM_CHAT_ID=<ENTER TELEGRAM CHAT_ID WHERE PHOTOS WILL BE PUBLISH>
 ```
@@ -34,7 +34,7 @@ Each of the photo services has its own script that can work independently. Also,
 ## fetch_nasa_APOD_images.py
 The script downloads the specified number of Astronomy Picture of the Day (APOD) photos taken by NASA. By default, the script downloads 3 photos
 ```
-python fetch_nasa_daytime_photos.py [-h] [-count COUNT]
+python fetch_nasa_APOD_images.py [-h] [-count COUNT] [-p IMAGE_PATH]
 ```
 options:
 
@@ -42,16 +42,21 @@ options:
 
 `-count COUNT` Number of photos to download
 
-##fetch_nasa_epic_images.py
+`-p IMAGE_PATH` Path for downloading images
+
+## fetch_nasa_epic_images.py
 The script downloads EPIC photo from NASA
 ```
-python fetch_nasa_epic_photos.py
+python fetch_nasa_epic_images.py [-h] [-p IMAGE_PATH]
 ```
+options:
+`-p IMAGE_PATH` Path for downloading images
 
 ## fetch_spacex_last_launch_photos.py
 The script returns photos of SpaceX launches by id. If id is not specified, then the script returns the photos of the last launch. Example launch id: 5eb87ce3ffd86e000604b336
+
 ```
-python fetch_spacex_last_launch_photos.py [-h] [-id ID] 
+python fetch_spacex_last_launch_photos.py [-h] [-id ID] [-p IMAGE_PATH]
 ```
 options:
 
@@ -59,17 +64,22 @@ options:
 
 `-id ID` launch id
 
+`-p IMAGE_PATH` Path for downloading images
+
 
 ## tgBot.py
 The script automatically posts photos every 'period' hours. If the 'period' parameter is missing, the publication occurs every 4 hours.
 ```
-python posting_in_tg_channel.py [-h] [-period PERIOD]
+python posting_in_tg_channel.py [-h] [-period PERIOD] [-p IMAGE_PATH]
 ```
 options:
 
 `-h, --help` show this help message and exit
 
 `-period PERIOD` frequency of posting pictures in hours
+
+`-p IMAGE_PATH` Path for downloading images
+
 
 Project Goals
 The code is written for educational purposes on online-course for web-developers dvmn.org.
