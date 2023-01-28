@@ -1,5 +1,6 @@
 import argparse
-from service_functions import get_response, fetch_images
+from pathlib import Path
+from service_functions import get_response, fetch_images, make_default_dir
 import json
 
 
@@ -11,8 +12,11 @@ def get_spacex_image_links(launch_id):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='[-h] [-id ID] '
+        description='[-h] [-id ID] [-p image_path]'
     )
-    parser.add_argument('--id', help='launch id', default='latest')
+    parser.add_argument('-id', help='launch id', default='latest')
+    parser.add_argument('-p', help='image_path', default=str(make_default_dir()))
     launch_id_from_user = parser.parse_args().id
-    fetch_images(get_spacex_image_links(launch_id_from_user))
+    image_dir = parser.parse_args().p
+    Path(image_dir).mkdir(parents=True, exist_ok=True)
+    fetch_images(image_dir, get_spacex_image_links(launch_id_from_user))

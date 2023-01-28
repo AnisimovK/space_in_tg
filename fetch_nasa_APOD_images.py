@@ -1,6 +1,7 @@
 import argparse
 from dotenv import dotenv_values
-from service_functions import get_response, fetch_images
+from pathlib import Path
+from service_functions import get_response, fetch_images, make_default_dir
 import json
 
 
@@ -14,8 +15,11 @@ if __name__ == '__main__':
     params_nasa = {'api_key': dict(dotenv_values(".env"))['NASA_API_KEY']}
 
     parser = argparse.ArgumentParser(
-        description='[-h] [-count your_count] '
+        description='[-h] [-count your_count] [-p image_path]'
     )
-    parser.add_argument('--count', help='images count', default='3')
+    parser.add_argument('-count', help='images count', default='3')
+    parser.add_argument('-p', help='image_path count', default=str(make_default_dir()))
     params_nasa['count'] = parser.parse_args().count
-    fetch_images(get_nasa_image_links(params_nasa))
+    image_dir = parser.parse_args().p
+    Path(image_dir).mkdir(parents=True, exist_ok=True)
+    fetch_images(image_dir, get_nasa_image_links(params_nasa))
