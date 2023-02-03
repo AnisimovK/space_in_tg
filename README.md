@@ -70,7 +70,7 @@ options:
 ## tgBot.py
 The script automatically posts photos every 'period' hours. If the 'period' parameter is missing, the publication occurs every 4 hours.
 ```
-python posting_in_tg_channel.py [-h] [-period PERIOD] [-p IMAGE_PATH]
+python tgBot.py [-h] [-period PERIOD] [-ipath IMAGE_PATH]
 ```
 options:
 
@@ -78,7 +78,7 @@ options:
 
 `-period PERIOD` frequency of posting pictures in hours
 
-`-p IMAGE_PATH` Path for downloading images
+`-ipath IMAGE_PATH` Path for downloading images
 
 
 Project Goals
