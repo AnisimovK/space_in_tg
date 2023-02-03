@@ -11,8 +11,7 @@ def get_nasa_epic_image_links(params):
     response_content = json.loads(get_response('https://api.nasa.gov/EPIC/api/natural/images', params=params))
     for image_data in response_content:
         img_name = image_data['image']
-        img_datetime = image_data['date'].split()
-        img_date = datetime.date.fromisoformat(img_datetime[0])
+        img_date = datetime.datetime.fromisoformat(image_data['date'])
         url = f"{root_of_image_link}{img_date.strftime('%Y/%m/%d')}/" \
               f"png/{img_name}" \
               f".png"

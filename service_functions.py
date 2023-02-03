@@ -1,7 +1,6 @@
 from urllib.parse import urlparse, unquote
 import requests
 import os
-from pathlib import Path
 
 
 class ExtensionException(Exception):
